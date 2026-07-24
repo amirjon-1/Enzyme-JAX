@@ -83,17 +83,12 @@ jobs:
           cat BUILD
           case "${{ matrix.os }}" in
             *macOS*|*macos*)
-              if [ "${{ runner.arch }}" = "ARM64" ]; then
-                sed -i.bak -e 's/"AMDGPU", //g' -e 's/, "AMDGPU"//g' -e 's/"X86", //g' -e 's/, "X86"//g' workspace.bzl
-              else
-                sed -i.bak -e 's/"AMDGPU", //g' -e 's/, "AMDGPU"//g' -e 's/"AArch64", //g' -e 's/, "AArch64"//g' workspace.bzl
-              fi
+              sed -i.bak -e 's/"AMDGPU", //g' -e 's/, "AMDGPU"//g' workspace.bzl
               ;;
             *x86*)
               sed -i.bak -e 's/"AArch64", //g' -e 's/, "AArch64"//g' workspace.bzl
               ;;
             *)
-              sed -i.bak -e 's/"X86", //g' -e 's/, "X86"//g' workspace.bzl
               ;;
           esac
           cat workspace.bzl
